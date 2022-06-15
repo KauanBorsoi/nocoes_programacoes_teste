@@ -6,6 +6,21 @@
     <body>
         <form action="" method="POST">
             <center>
+                <label>Nome: </label><br>
+                <input type="test" name="nome" required><br>
+
+                <label> Sobrenome: </label><br>
+                <input type="test" name="Sobrenome" required><br>
+
+                <label> Idade: </label><br>
+                <input type="number" name="Idade" required><br>
+
+                <label> Data: </label><br>
+                <input type="date" name="data" required><br>
+
+                <label> Peso: </label><br>
+                <input type="number" name="peso" required><br>
+
                 <label>Cidade: </label><br>
                 <input type="text" name="cidade" required><br>
 
@@ -55,27 +70,32 @@
         // echo "<Br>";
 
         $arrayPessoas = array();
-        echo "<br>O meu array de pessoas: <br>";
-        print_r($arrayPessoas);
+        function inserirPessoaNaLista($arrayPessoas, $item){
+            $pessoa = new pessoa_obj();
+            $pessoa->name = $item ['nome'];
+            $pessoa->sobrenome = $item ['Sobrenome'];
+            $pessoa->idade = $item ['Idade'];
+            $pessoa->date = $item ['data'];
+            $pessoa->peso = $item ['peso'];
+            $pessoa->cidade = $item ['cidade'];
+            $pessoa->estado = $item ['estado'];
+
+            array_push($arrayPessoas, $pessoa);
+            return $arrayPessoas;
+            
+        }
+
+        //echo "<br>O meu array de pessoas: <br>";
+       // print_r($arrayPessoas);
         array_push($arrayPessoas, $pessoa);
         array_push($arrayPessoas, $pessoa2);
         array_push($arrayPessoas, $pessoa3);
         
         echo "<br><br><pre>";
-        print_r($arrayPessoas);
+       // print_r($arrayPessoas);
         echo "</pre><br><br>";
         
-        echo "<table border='1'>";
-        for ($posicao=0; $posicao < count($arrayPessoas); $posicao++) { 
-            if($arrayPessoas[$posicao]->idade < 20){
-                echo "<tr>";
-                    echo "<td> ".$arrayPessoas[$posicao]->name."</td>";
-                    echo "<td> ".$arrayPessoas[$posicao]->sobrenome."</td>";
-                echo "</tr>";
-            } 
-        }
-        //teste .. github
-        echo "</table>";
+        
         //echo "<br>";
         //for ($posicao=count($arrayPessoas)-1; $posicao > -1; $posicao--) { 
         //    echo "Oie ".$arrayPessoas[$posicao]->name;
@@ -86,22 +106,38 @@
             }else if($_POST['estado'] == ""){
                 echo "Sr Usuário, o campo estado não foi preenchido.";
             }else{
-                echo "Dados Cadastrados com Sucesso";
+             $arrayPessoas = inserirPessoaNaLista($arrayPessoas, $_POST);
+              echo "Dados Cadastrados com Sucesso";
             }
         }
+       // print_r ($arrayPessoas);
+
+        echo "<table border='1'>";
+        for ($posicao=0; $posicao < count($arrayPessoas); $posicao++) { 
+            if($arrayPessoas[$posicao]->idade < 100){
+                echo "<tr>";
+                    echo "<td> ".$arrayPessoas[$posicao]->name."</td>";
+                    echo "<td> ".$arrayPessoas[$posicao]->sobrenome."</td>";
+                echo "</tr>";
+            } 
+        }
+        //teste .. github
+        echo "</table>";
+
         ?>
         
-        <table border="1">              <!-- inicando a tabela -->
-            <tr>                        <!-- iniciando a linha -->
-                <td>Cidade:</td>        <!-- iniciando e fechando uma coluna -->
-                <td>Estado:</td>        <!-- iniciando e fechando uma coluna -->
-            </tr>                       <!-- fechando a linha -->
-            <tr>                        <!-- iniciando a linha -->
-                <td>Tarumã</td>         <!-- iniciando e fechando uma coluna -->
-                <td>SP</td>             <!-- iniciando e fechando uma coluna -->
-            </tr>                       <!-- fechando a linha -->
+        <!-- <table border="1">              inicando a tabela -->
+            <!-- <tr>                        iniciando a linha -->
+                <!-- <td>Cidade:</td>        iniciando e fechando uma coluna -->
+                <!-- <td>Estado:</td>        iniciando e fechando uma coluna -->
+            <!-- </tr>                       fechando a linha -->
+            <!-- <tr>                        iniciando a linha -->
+                <!-- <td>Tarumã</td>         iniciando e fechando uma coluna -->
+                <!-- <td>SP</td>             iniciando e fechando uma coluna -->
+            <!-- </tr>                       fechando a linha -->
 
-        </table>                        <!-- fechando a tabela -->
+        <!-- </table>                fechando a tabela -->
+
         </center>
         
     </body>
